@@ -1,4 +1,4 @@
-FROM golang:1.18 
+FROM golang:1.18 as build
 ARG BUILD_VERSION
 WORKDIR /app/
 COPY . ./
@@ -8,5 +8,5 @@ RUN go test -v ./...
 RUN go build -o kube-host-sensor --ldflags "-w -s -X main.BuildVersion=$BUILD_VERSION"
 
 FROM alpine
-COPY --from=0 /app/kube-host-sensor /.
+COPY --from=build /app/kube-host-sensor /.
 ENTRYPOINT [ "./kube-host-sensor" ]
