@@ -10,7 +10,7 @@ on:
 jobs:
   build-docker:
     name: Build docker container, tag and upload to registry
-    if: ${{ github.repository == 'lolo32/kubescape-host-scanner' }}
+    if: ${{ github.repository == 'kubescape/host-scanner' }}
     runs-on: ubuntu-latest
     permissions:
           contents: read
